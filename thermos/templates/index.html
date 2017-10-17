@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+Thermos -- Welcome
+{% endblock %}
+
+{% block content %}
+    <article>
+        <header>
+            <h1>Welcome!</h1>
+            <p>Thermos is a simple social bookmarking site.</p>
+            <p>Don't have an account? Create one.</p>
+        </header>
+        <section>
+            <h2>Recently added</h2>
+            {% if new_bookmarks.count() > 0 %}  <!-- the count is necessary because the variable is a SQL_Alchemy query object, and would always return true       -->
+                {% with bookmarks=new_bookmarks %}
+                    {% include "bookmark_list.html" %}
+                {% endwith %}
+            {% else %}
+                No bookmarks have been added yet.
+            {% endif %}
+        </section>
+    </article>
+{% endblock %}
